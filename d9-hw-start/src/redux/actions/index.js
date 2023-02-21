@@ -12,10 +12,24 @@ export const SET_ERROR_OFF = "SET_ERROR_OFF";
 
 /// DISPATCH
 
-export const addToFav = (element) => ({
+/* export const addToFav = (element) => ({
   type: ADD_TO_FAV,
   payload: element,
-});
+}); */
+
+export const addToFav = (element) => {
+  return (dispatch, getState, i) => {
+    const currentState = getState();
+    console.log(currentState.fav.favourites.content);
+    if (
+      currentState.fav.favourites.content.findIndex(
+        (job) => job === element
+      ) === -1
+    ) {
+      dispatch({ type: ADD_TO_FAV, payload: element });
+    }
+  };
+};
 
 export const removeToFav = (element) => ({
   type: REMOVE_TO_FAV,
