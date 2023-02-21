@@ -1,36 +1,33 @@
-/* import { REMOVE_TO_FAV, ADD_TO_FAV } from "../actions";
+import {
+  IS_LOADING_OFF,
+  IS_LOADING_ON,
+  IS_ERROR,
+  SET_ERROR_OFF,
+  SET_ERROR_ON,
+} from "../actions";
 
 const initialState = {
-  favourites: {
-    content: [],
-  },
+  loading: false,
+  error: false,
+  msgError: "",
 };
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
-     case ADD_TO_FAV:
-      return {
-        ...state,
-        favourites: {
-          ...state.favourites,
-          content: [...state.favourites.content, action.payload],
-        },
-      };
-
-    case REMOVE_TO_FAV:
-      return {
-        ...state,
-        favourites: {
-          ...state.favourites,
-          content: state.favourites.content.filter(
-            (_, i) => i !== action.payload
-          ),
-        },
-      };
+    case IS_LOADING_ON:
+      return { ...state, loading: true };
+    case IS_LOADING_OFF:
+      return { ...state, loading: false };
+    case IS_ERROR:
+      return { ...state, msgError: action.payload };
+    case SET_ERROR_ON:
+      return { ...state, error: true };
+    case SET_ERROR_OFF:
+      return { ...state, error: false };
 
     default:
       return state;
   }
 };
 
-export default appReducer; */
+export default appReducer;

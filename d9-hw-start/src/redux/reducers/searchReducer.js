@@ -2,7 +2,7 @@ import { SAVE_JOB, SEARCH_JOB } from "../actions";
 
 const initialState = {
   job: [],
-  search: "",
+  search: null,
 };
 
 const saveReducer = (state = initialState, action) => {

@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-/* import appReducer from "../reducers"; */
+import appReducer from "../reducers";
 import memoryReducer from "../reducers/memoryFav";
 import searchReducer from "../reducers/searchReducer";
 
@@ -19,7 +19,7 @@ const persistConfig = {
 };
 
 const rootReducers = combineReducers({
-  /*  app: appReducer, */
+  app: appReducer,
   fav: memoryReducer,
   search: searchReducer,
 });

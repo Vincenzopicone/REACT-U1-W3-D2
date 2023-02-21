@@ -1,6 +1,6 @@
 /* import { useEffect, useState } from 'react' */
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Row, Col, Form} from 'react-bootstrap'
+import { Container, Row, Col, Form, Spinner, Alert} from 'react-bootstrap'
 import Job from './Job'
 import { getJobs, /* SAVE_JOB, */ SEARCH_JOB } from '../redux/actions'
 
@@ -11,7 +11,10 @@ const MainSearch = () => {
   const dispatch = useDispatch()
   const setJobs = useSelector(state =>state.search.job)
   const searchJob = useSelector(state => state.search.search)
-  console.log(searchJob)
+  const isLoading = useSelector (state=> state.app.loading)
+  const isError = useSelector(state=> state.app.msgError)
+  const setError = useSelector(state => state.app.error)
+
   
 
   const handleChange = (e) => {
@@ -23,10 +26,7 @@ const MainSearch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     dispatch(getJobs(searchJob))
-    
-   
-
-    /* try {
+       /* try {
       const response = await fetch(baseEndpoint + query + '&limit=20')
       if (response.ok) {
         const { data } = await response.json()
@@ -61,6 +61,10 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
+          <div className='d-flex justify-content-center align-items-center p-3'>
+          {isLoading && (<Spinner animation="border" variant="primary" />)}
+          {setError && (<Alert variant='danger'>{isError}</Alert> )}
+          </div>
           {setJobs.map((jobData) => (
             <Job key={jobData._id} data={jobData} />
           ))}
